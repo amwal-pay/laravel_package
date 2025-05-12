@@ -4,7 +4,7 @@
 1. Install the AmwalPay Laravel Package via [amwalpay/laravel-package](https://packagist.org/packages/amwalpay/laravel-package)
 
 ```bash
-composer require amwalpay/laravel-package
+composer require amwalpay/laravel-package:dev-main
 ```
 
 2. Publish the AmwalPay Service Provider using the following command.
