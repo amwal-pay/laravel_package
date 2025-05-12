@@ -9,20 +9,19 @@ return [
     /**
      * Merchant ID
      */
-    'merchant_id' => '116194',
+    'merchant_id' => 'xxxxx',
     /**
      * Terminal ID
      */
-    'terminal_id' => '708393',
+    'terminal_id' => 'xxxxxx',
     /**
      * Secret Key
      */
-    'secret_key' => '2B03FCDC101D3F160744342BFBA0BEA0E835EE436B6A985BA30464418392C703',
+    'secret_key' => 'xxxxxxxxxxxxxxxxx',
     /**
      * Callback URL
      * Replace only the {example.com} with your site domain
      */
-    // 'callback_url' => 'https://{YourWebsiteURL}/amwalpay/callback',
-    'callback_url' => 'http://127.0.0.1:8000/amwalpay/callback',
+     'callback_url' => 'https://{YourWebsiteURL}/amwalpay/callback',
 
 ];
