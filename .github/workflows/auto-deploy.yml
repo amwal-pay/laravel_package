@@ -1,0 +1,44 @@
+name: Package Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # e.g., v1.0.0
+
+jobs:
+  release:
+    name: Release Laravel Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, curl, json
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist --no-progress
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to main (optional, only if working from another branch)
+        if: github.ref != 'refs/heads/main'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git checkout main
+          git merge ${{ github.ref_name }}
+          git push origin main
