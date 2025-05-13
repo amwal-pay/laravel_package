@@ -18,6 +18,7 @@ class AmwalPayServiceProvider extends ServiceProvider {
             __DIR__ . '/../config/amwalpay.php'             => config_path('amwalpay.php'),
             __DIR__ . '/controllers/AmwalPayController.php' => app_path() . '/Http/Controllers/AmwalPayController.php',
             __DIR__ . '/resources/views' => resource_path('views/vendor/amwalpay'),
+            __DIR__ . '/resources/js' => public_path('js/vendor/amwalpay'),
                 ], 'amwalpay');
 
         Route::get('amwalpay/callback', [
