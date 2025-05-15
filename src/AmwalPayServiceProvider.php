@@ -13,7 +13,6 @@ class AmwalPayServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'amwalpay');
         $this->publishes([
             __DIR__ . '/../config/amwalpay.php'             => config_path('amwalpay.php'),
             __DIR__ . '/controllers/AmwalPayController.php' => app_path() . '/Http/Controllers/AmwalPayController.php',
