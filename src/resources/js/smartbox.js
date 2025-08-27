@@ -34,10 +34,10 @@ if (window.myAppData.url && window.myAppData.jsonData && window.myAppData.callba
             },
             errorCallback: function (data) {
                 console.log("errorCallback Received Data", data);
-                // window.location = cancel_url;
             },
             cancelCallback: function () {
-
+                var cancel_url = window.myAppData.cancel_url;
+                window.location = cancel_url;
             },
         };
         SmartBox.Checkout.showSmartBox()

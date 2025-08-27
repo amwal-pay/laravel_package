@@ -2,7 +2,8 @@
     window.myAppData = {
         url: @json($url),
         jsonData: @json($jsonData),
-        callback: @json($callback)
+        callback: @json($callback),
+        cancel_url: @json($cancel_url)
     };
 </script>
 

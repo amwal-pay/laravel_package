@@ -72,13 +72,15 @@ class AmwalPayController extends Controller
             $jsonData = json_encode($data);
             $url = $this->getSmartBoxUrl($this->environment);
             $callback = $this->callback_url;
+            $cancel_url= ''; // Adjust the cancel url according your needs
+
             Log::info('Initiating AmwalPay payment process', [
                 'data' => $data,
                 'url' => $url,
                 'callback' => $callback,
             ]);
             // Return the SmartBox payment view
-            return view('amwalpay::smartbox', compact('jsonData', 'url', 'callback'));
+            return view('amwalpay::smartbox', compact('jsonData', 'url', 'callback','cancel_url'));
 
         } catch (Exception $e) {
             // Log or handle the exception
@@ -131,7 +133,7 @@ class AmwalPayController extends Controller
                 'request' => $integrityParameters
             ]);
             // Check payment status based on response code or secure hash match
-            if (self::sanitizeVar('responseCode') === '00' || $secureHashValue === self::sanitizeVar('secureHashValue')) {
+            if (self::sanitizeVar('responseCode') === '00' && $secureHashValue === self::sanitizeVar('secureHashValue')) {
                 $isPaymentApproved = true;
             }
             // You can adjust the redirection on success or failure transactions according to your needs
