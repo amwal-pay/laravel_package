@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -35,7 +36,7 @@ class AmwalPayController extends Controller
         try {
             // Prepare static or dynamic order data
             $orderId = '1';       // Replace with dynamic ID logic in production
-            $amount = '1.000';   // Replace with real amount logic
+            $amount = '1';   // Replace with real amount logic
 
             // Language code handling
             $locale = app()->getLocale();
@@ -44,7 +45,7 @@ class AmwalPayController extends Controller
             $datetime = date('YmdHis');
 
             // Generate secure hash for request integrity
-            $secret_key = self::generateString(
+            $secureHash = self::generateString(
                 $amount,
                 512,
                 $this->merchant_id,
@@ -62,13 +63,12 @@ class AmwalPayController extends Controller
                 'TID' => $this->terminal_id,
                 'CurrencyId' => 512,
                 'LanguageId' => $locale,
-                'SecureHash' => $secret_key,
+                'SecureHash' => $secureHash,
                 'TrxDateTime' => $datetime,
                 'PaymentViewType' => 1,
                 'RequestSource' => 'Checkout_Direct_Integration',
                 'SessionToken' => '',
             ];
-
             $jsonData = json_encode($data);
             $url = $this->getSmartBoxUrl($this->environment);
             $callback = $this->callback_url;
@@ -78,6 +78,7 @@ class AmwalPayController extends Controller
                 'data' => $data,
                 'url' => $url,
                 'callback' => $callback,
+                'cancel_url' => $cancel_url,
             ]);
             // Return the SmartBox payment view
             return view('amwalpay::smartbox', compact('jsonData', 'url', 'callback','cancel_url'));

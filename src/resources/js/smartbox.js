@@ -1,23 +1,12 @@
-if (window.myAppData.url && window.myAppData.jsonData && window.myAppData.callback) {
-    // Adding the script tag to the head as suggested before
-    var head = document.head;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = window.myAppData.url;
-    // Fire the loading
-    head.appendChild(script);
+if (window.myAppData.jsonData && window.myAppData.callback) {
 
-    setTimeout(function () {
-        // Parse JSON string to JavaScript object
-        var jsonData = window.myAppData.jsonData;
-        var data = JSON.parse(jsonData);
-        callSmartBox(data);
-    }, 2000);
-
-    var callBackStatus = "";
+    // Parse JSON string to JavaScript object
+    var jsonData = window.myAppData.jsonData;
+    var data = JSON.parse(jsonData);
+    callSmartBox(data);
 
     function callSmartBox(data) {
-
+        
         if (data["MID"] === "" || data["TID"] === "") {
             alert('Please add the correct configurations.');
             return;
